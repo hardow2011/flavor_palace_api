@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  specialInstructions: MyString
+  promoCode: MyString
+  addUtensilsAndNapkins: false
+  customer: one
+
+two:
+  specialInstructions: MyString
+  promoCode: MyString
+  addUtensilsAndNapkins: false
+  customer: two
