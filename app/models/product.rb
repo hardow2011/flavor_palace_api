@@ -8,6 +8,10 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
+# Indexes
+#
+#  index_products_on_permalink  (permalink) UNIQUE
+#
 class Product < ApplicationRecord
   after_create :create_options
   before_save :generate_permalink
@@ -15,6 +19,13 @@ class Product < ApplicationRecord
   attr_accessor :quantity, :price, :description, :hidden
 
   has_many :product_options, dependent: :delete_all
+
+  def as_json(options = nil)
+    super(except: [:id, :created_at, :updated_at],
+          include: { product_options:
+                       { except:
+                           [:id, :created_at, :updated_at] } })
+  end
 
   private
 
