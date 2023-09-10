@@ -25,7 +25,7 @@ class ProductOption < ApplicationRecord
   before_create :assign_standard_values
 
   def as_json(options = nil)
-    super(except: [:id, :created_at, :updated_at])
+    super(except: [:created_at, :updated_at])
   end
 
   private

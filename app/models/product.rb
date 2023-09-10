@@ -22,10 +22,10 @@ class Product < ApplicationRecord
   accepts_nested_attributes_for :product_options
 
   def as_json(options = nil)
-    super(except: [:id, :created_at, :updated_at],
+    super(except: [:created_at, :updated_at],
           include: { product_options_attributes:
                        { except:
-                           [:id, :created_at, :updated_at] } })
+                           [:created_at, :updated_at] } })
   end
 
   private
