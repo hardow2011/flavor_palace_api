@@ -22,4 +22,9 @@
 #
 class ProductOption < ApplicationRecord
   belongs_to :product
+
+  def as_json(options = nil)
+    super(except: [:id, :created_at, :updated_at])
+  end
+
 end
