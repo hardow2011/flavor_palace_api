@@ -13,6 +13,11 @@ class ProductsController < ApplicationController
     render json: @product
   end
 
+  def find_by_permalink
+    product = Product.find_by_permalink(params[:permalink])
+    render json: product
+  end
+
   # POST /products
   def create
     @product = Product.new(product_params)
