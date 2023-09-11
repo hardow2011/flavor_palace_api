@@ -23,6 +23,7 @@
 class ProductOption < ApplicationRecord
   belongs_to :product
   before_create :assign_standard_values
+  has_many :images
 
   def as_json(options = nil)
     super(except: [:created_at, :updated_at])
