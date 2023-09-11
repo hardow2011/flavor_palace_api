@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :images
   resources :product_options
   get 'products/:permalink', to: 'products#find_by_permalink'
   resources :products
