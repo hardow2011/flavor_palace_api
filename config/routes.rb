@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resources :images
+  # overwrite the images create route
+  post 'images/:product_option_id', to: 'images#create'
+  resources :images, except: :create
+
   resources :product_options
   get 'products/:permalink', to: 'products#find_by_permalink'
   resources :products
