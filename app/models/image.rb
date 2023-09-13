@@ -16,7 +16,23 @@
 #
 #  fk_rails_...  (product_option_id => product_options.id)
 #
+
+include Rails.application.routes.url_helpers
+
 class Image < ApplicationRecord
   belongs_to :product_option
   has_one_attached :media
+
+  attr_readonly :media_url
+
+  def as_json(options = nil)
+    super(except: [:created_at, :updated_at], methods: [:media_url])
+  end
+
+  def media_url
+    return url_for(self.media)
+  end
+
+  private
+
 end
