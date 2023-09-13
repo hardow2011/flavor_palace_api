@@ -16,6 +16,7 @@ class ImagesController < ApplicationController
   # POST /images
   def create
     @image = Image.new(image_params)
+    assign_media
 
     if @image.save
       render json: @image, status: :created, location: @image
@@ -39,13 +40,17 @@ class ImagesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_image
-      @image = Image.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_image
+    @image = Image.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def image_params
-      params.require(:image).permit(:order)
-    end
+  # Only allow a list of trusted parameters through.
+  def image_params
+    params.permit(:media, :order, :product_option_id)
+  end
+
+  def assign_media
+    @image.media.attach(io: params[:media], filename: params[:media].original_filename, content_type: params[:media].content_type)
+  end
 end
