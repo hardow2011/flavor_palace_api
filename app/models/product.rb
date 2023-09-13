@@ -25,7 +25,15 @@ class Product < ApplicationRecord
     super(except: [:created_at, :updated_at],
           include: { product_options_attributes:
                        { except:
-                           [:created_at, :updated_at] } })
+                           [:created_at, :updated_at],
+                         include:
+                           { images:
+                               { except: [:created_at, :updated_at],
+                                 methods: [:media_url]
+                               }
+                           }
+                       },
+          })
   end
 
   private
