@@ -32,7 +32,6 @@ class ProductOption < ApplicationRecord
   private
 
   def assign_standard_values
-    byebug
     self.name = 'Standard'
     self.hidden = self.product.hidden || false
   end
