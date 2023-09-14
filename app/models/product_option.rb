@@ -24,7 +24,7 @@
 class ProductOption < ApplicationRecord
   belongs_to :product
   before_create :assign_standard_values
-  has_many :images
+  has_many :images, dependent: :destroy
 
   validates :default_description, uniqueness: { scope: :product }
 
