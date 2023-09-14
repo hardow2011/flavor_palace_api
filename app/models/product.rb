@@ -36,6 +36,10 @@ class Product < ApplicationRecord
           })
   end
 
+  def add_no_options_error
+    errors.add(:product_options, 'There must be at least one product option.')
+  end
+
   private
 
   def product_options_attributes
