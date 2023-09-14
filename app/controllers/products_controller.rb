@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: %i[ show update destroy ]
+  before_action :set_product, only: %i[ show update destroy verify_options_existence ]
+  before_action :verify_options_existence, only: [:update]
 
   # GET /products
   def index
@@ -44,13 +45,23 @@ class ProductsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_product
-      @product = Product.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def product_params
-      params.require(:product).permit(:name, :hidden, product_options_attributes: [:id, :name, :quantity, :price, :description, :default_description, :hidden, :_destroy] )
+  # Use callbacks to share common setup or constraints between actions.
+  def set_product
+    @product = Product.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def product_params
+    params.require(:product).permit(:name, :hidden, product_options_attributes: [:id, :name, :quantity, :price, :description, :default_description, :hidden, :_destroy])
+  end
+
+  def verify_options_existence
+    # If there are no options not marked with destroy, that is, if all options are set to be destroyed
+    non_destroyed_options = params[:product][:product_options_attributes].reject { |po| po[:_destroy] == "true" }
+    if non_destroyed_options.empty?
+      @product.add_no_options_error
+      render json: @product.errors, status: :unprocessable_entity
     end
+  end
 end
