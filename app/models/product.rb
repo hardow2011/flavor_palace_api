@@ -18,7 +18,7 @@ class Product < ApplicationRecord
   attr_accessor :quantity, :price, :description, :hidden
   attr_readonly :product_options_attributes
 
-  has_many :product_options, dependent: :delete_all
+  has_many :product_options, dependent: :destroy
   accepts_nested_attributes_for :product_options
 
   def as_json(options = nil)
