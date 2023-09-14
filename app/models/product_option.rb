@@ -2,15 +2,16 @@
 #
 # Table name: product_options
 #
-#  id          :bigint           not null, primary key
-#  description :string
-#  hidden      :boolean
-#  name        :string
-#  price       :float
-#  quantity    :integer
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  product_id  :bigint           not null
+#  id                  :bigint           not null, primary key
+#  default_description :boolean
+#  description         :string
+#  hidden              :boolean
+#  name                :string
+#  price               :float
+#  quantity            :integer
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  product_id          :bigint           not null
 #
 # Indexes
 #
@@ -25,6 +26,8 @@ class ProductOption < ApplicationRecord
   before_create :assign_standard_values
   has_many :images
 
+  validates :default_description, uniqueness: { scope: :product }
+
   def as_json(options = nil)
     super(except: [:created_at, :updated_at])
   end
@@ -32,8 +35,7 @@ class ProductOption < ApplicationRecord
   private
 
   def assign_standard_values
-    self.name = 'Standard'
-    self.hidden = self.product.hidden || false
+    self.default_description = self.default_description || false
   end
 
 end
