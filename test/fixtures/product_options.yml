@@ -2,15 +2,16 @@
 #
 # Table name: product_options
 #
-#  id          :bigint           not null, primary key
-#  description :string
-#  hidden      :boolean
-#  name        :string
-#  price       :float
-#  quantity    :integer
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  product_id  :bigint           not null
+#  id                  :bigint           not null, primary key
+#  default_description :boolean
+#  description         :string
+#  hidden              :boolean
+#  name                :string
+#  price               :float
+#  quantity            :integer
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  product_id          :bigint           not null
 #
 # Indexes
 #
