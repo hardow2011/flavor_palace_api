@@ -19,7 +19,7 @@ class Product < ApplicationRecord
   attr_readonly :product_options_attributes
 
   has_many :product_options, dependent: :destroy
-  accepts_nested_attributes_for :product_options
+  accepts_nested_attributes_for :product_options, allow_destroy: true
 
   def as_json(options = nil)
     super(except: [:created_at, :updated_at],
