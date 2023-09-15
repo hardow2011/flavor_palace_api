@@ -1,4 +1,4 @@
-class DeliveryInfosController < ApplicationController
+class Api::V1::DeliveryInfosController < ApplicationController
   before_action :set_delivery_info, only: %i[ show update destroy ]
 
   # GET /delivery_infos

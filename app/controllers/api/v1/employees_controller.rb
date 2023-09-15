@@ -1,4 +1,4 @@
-class EmployeesController < ApplicationController
+class Api::V1::EmployeesController < ApplicationController
   before_action :set_employee, only: %i[ show update destroy ]
 
   # GET /employees

@@ -1,4 +1,4 @@
-class ProductOptionsController < ApplicationController
+class Api::V1::ProductOptionsController < ApplicationController
   before_action :set_product_option, only: %i[ show update destroy ]
 
   # GET /product_options
