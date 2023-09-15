@@ -23,7 +23,7 @@ class Image < ApplicationRecord
   belongs_to :product_option
   has_one_attached :media
 
-  attr_readonly :media_url
+  attr_readonly :media_url, :small_media_url
 
   def as_json(options = nil)
     super(except: [:created_at, :updated_at], methods: [:media_url])
@@ -31,6 +31,10 @@ class Image < ApplicationRecord
 
   def media_url
     return url_for(self.media)
+  end
+
+  def small_media_url
+    return url_for(self.media.variant(resize_to_limit: [400, 400]))
   end
 
   private
