@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
+      post 'authentication/create'
+
       # overwrite the images create route
       post 'images/:product_option_id', to: 'images#create'
       resources :images, except: :create
