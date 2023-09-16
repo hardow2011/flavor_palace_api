@@ -4,8 +4,8 @@
 #
 #  id                      :bigint           not null, primary key
 #  email                   :string
-#  firstName               :string
-#  lastName                :string
+#  first_name              :string
+#  last_name               :string
 #  login_token             :string
 #  login_token_verified_at :datetime
 #  created_at              :datetime         not null
