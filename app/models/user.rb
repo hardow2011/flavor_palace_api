@@ -35,9 +35,23 @@ class User < ApplicationRecord
       email: email,
       exp: 1.hour.from_now.to_i
     }
-    # set login_token o validate last ent login token
+    # set login_token to validate last sent login token
     self.login_token = generate_token(payload)
     save!
+  end
+
+  def generate_auth_token
+    self.login_token = nil
+    self.login_token_verified_at = Time.now
+    self.save
+
+    payload = {
+      user_id: id,
+      login_token_verified_at: login_token_verified_at,
+      exp: 1.day.from_now.to_i
+    }
+
+    generate_token(payload)
   end
 
   def login_link
