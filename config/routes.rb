@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      post 'authentication/create'
 
       # overwrite the images create route
       post 'images/:product_option_id', to: 'images#create'
@@ -15,6 +14,9 @@ Rails.application.routes.draw do
       resources :customers
       resources :employees
       resources :users
+
+      post 'authentication/create'
+      post 'sessions/create'
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
