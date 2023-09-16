@@ -1,6 +1,7 @@
 class Api::V1::ProductsController < ApplicationController
   before_action :set_product, only: %i[ show update destroy verify_options_existence ]
   before_action :verify_options_existence, only: [:update]
+  skip_before_action :authenticate_request!, only: [:index, :show, :find_by_permalink]
 
   # GET /products
   def index
