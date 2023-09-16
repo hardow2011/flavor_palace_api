@@ -1,4 +1,5 @@
 class Api::V1::SessionsController < ApplicationController
+  skip_before_action :authenticate_request!
   def create
     login_token = params[:login_token].to_s
     decoded_token = JsonWebToken.decode(login_token)
