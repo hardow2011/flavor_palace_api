@@ -9,10 +9,10 @@ class Api::V1::SessionsController < ApplicationController
       if user
         render json: { auth_token: user.generate_auth_token }
       else
-        render son: { error: 'Invalid Request' }, status: :unauthorized
+        render json: { error: 'Invalid Request' }, status: :unauthorized
       end
     else
-      render son: { error: 'Invalid Request' }, status: :unauthorized
+      render json: { error: 'Invalid Request' }, status: :unauthorized
     end
   end
 end
