@@ -56,7 +56,7 @@ class User < ApplicationRecord
 
   def login_link
     # Rails.application.routes.url_helpers.api_v1_sessions_create_url(login_token: login_token)
-    # TO-DO: replace hardcoded link
+    # TODO: replace hardcoded link
     "http://localhost:8000/auth?login_token=#{login_token}"
   end
 
