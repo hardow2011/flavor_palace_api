@@ -23,9 +23,9 @@ class User < ApplicationRecord
             presence: true
   before_save :downcase_email
 
-  def send_magic_link
+  def send_magic_link(request_origin)
     generate_login_token
-    UserMailer.magic_link(self, login_link).deliver_now
+    UserMailer.magic_link(self, login_link(request_origin)).deliver_now
   end
 
   # generate login token to authorize user
@@ -54,10 +54,8 @@ class User < ApplicationRecord
     generate_token(payload)
   end
 
-  def login_link
-    # Rails.application.routes.url_helpers.api_v1_sessions_create_url(login_token: login_token)
-    # TODO: replace hardcoded link
-    "http://localhost:8000/auth?login_token=#{login_token}"
+  def login_link(request_origin)
+    "#{request_origin}/auth?login_token=#{login_token}"
   end
 
   private
